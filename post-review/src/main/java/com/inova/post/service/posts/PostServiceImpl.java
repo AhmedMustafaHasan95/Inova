@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.Collectors;
+
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
@@ -36,15 +38,20 @@ public class PostServiceImpl implements PostService {
     public PageDTO getUserPosts(PageDTO pageDTO) {
         Sort sort = Sort.by(Sort.Direction.ASC, "postId");
         Pageable pageable = PageRequest.of(pageDTO.getNumber() - 1, pageDTO.getSize(), sort);
-        Page<Post> posts = postRepo.findAll(pageable);
+        Page<Post> posts = postRepo.findByUser(new User(pageDTO.getUserId()), pageable);
         pageDTO.setAllSize(posts.getTotalElements());
-        pageDTO.setData(posts.getContent());
+        pageDTO.setData(posts.getContent().stream().map(p -> modelMapper.map(p,PostDTO.class)).collect(Collectors.toList()));
         return pageDTO;
     }
 
     @Override
     @Transactional
     public PageDTO getTopPosts(PageDTO pageDTO) {
-        return null;
+        Sort sort = Sort.by(Sort.Direction.DESC, "rate");
+        Pageable pageable = PageRequest.of(pageDTO.getNumber() - 1, pageDTO.getSize(), sort);
+        Page<Post> posts = postRepo.findAll(pageable);
+        pageDTO.setAllSize(posts.getTotalElements());
+        pageDTO.setData(posts.getContent().stream().map(p -> modelMapper.map(p,PostDTO.class)).collect(Collectors.toList()));
+        return pageDTO;
     }
 }

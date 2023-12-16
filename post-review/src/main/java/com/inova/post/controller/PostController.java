@@ -20,18 +20,33 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/createPost")
-    public ResponseEntity<PostDTO> cr(@RequestBody PostDTO postDTO) {
-        postService.createPost(postDTO);
-        return ResponseEntity.ok(postDTO);
+    public ResponseEntity createPost(@RequestBody PostDTO postDTO) {
+        try {
+            postService.createPost(postDTO);
+            return ResponseEntity.ok(postDTO);
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
+
     @PostMapping("/getUserPosts")
-    public ResponseEntity<PageDTO> getUserPosts(@RequestBody PageDTO pageDTO) {
-        postService.getUserPosts(pageDTO);
-        return ResponseEntity.ok(pageDTO);
+    public ResponseEntity getUserPosts(@RequestBody PageDTO pageDTO) {
+        try {
+            postService.getUserPosts(pageDTO);
+            return ResponseEntity.ok(pageDTO);
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
+
     @PostMapping("/getTopPosts")
-    public ResponseEntity<PageDTO> getTopPosts(@RequestBody @Valid PageDTO pageDTO) {
-        postService.getTopPosts(pageDTO);
-        return ResponseEntity.ok(pageDTO);
+    public ResponseEntity getTopPosts(@RequestBody @Valid PageDTO pageDTO) {
+        try {
+            postService.getTopPosts(pageDTO);
+            return ResponseEntity.ok(pageDTO);
+
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 }

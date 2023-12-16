@@ -1,10 +1,11 @@
 package com.inova.post.DTO;
 
-public class PageDTO<T> {
+public class PageDTO {
     private int size;
     private int number;
     private long allSize;
-    private T data;
+    private Object data;
+    private long userId;
 
     public PageDTO() {
     }
@@ -33,11 +34,19 @@ public class PageDTO<T> {
         this.allSize = allSize;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

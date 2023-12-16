@@ -10,6 +10,7 @@ public class PostDTO {
     private long postId;
     private String title;
     private String body;
+    private float rate;
     private Long userId;
 
     public PostDTO() {
@@ -45,5 +46,13 @@ public class PostDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public float getRate() {
+        return rate;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
     }
 }

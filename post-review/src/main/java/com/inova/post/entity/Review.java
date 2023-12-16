@@ -1,10 +1,13 @@
 package com.inova.post.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "REVIEW")
-public class Review {
+public class Review implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "REVIEW_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
