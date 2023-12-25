@@ -46,7 +46,6 @@ public class MiddleNode {
 /*
 *
 * Time Complexity: O(n) - where n is the number of nodes in the linked list. The algorithm uses two pointers to traverse the list, and the fast pointer moves twice as fast as the slow pointer.
-* Space Complexity: O(1) - The algorithm uses only a constant amount of extra space regardless of the input size.
 *
 * */
 
